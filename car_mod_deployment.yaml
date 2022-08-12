@@ -1,0 +1,31 @@
+  apiVersion: serving.yatai.ai/v1alpha2
+  kind: BentoDeployment
+  metadata:
+    name: cpf-deployment
+    namespace: yatai-dev-ui-1
+  spec:
+    bento_tag: car_power:q4fmsia2rkavrktg
+    ingress:
+      enabled: true
+    resources:
+      limits:
+          cpu: "500m"
+          memory: "512m"
+      requests:
+          cpu: "250m"
+          memory: "128m"
+    autoscaling:
+      max_replicas: 10
+      min_replicas: 2
+    runners:
+    - name: car_power_factor_model
+      resources:
+        limits:
+          cpu: "1000m"
+          memory: "1Gi"
+        requests:
+          cpu: "500m"
+          memory: "512m"
+        autoscaling:
+          max_replicas: 4
+          min_replicas: 1
